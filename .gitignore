@@ -1,15 +1,54 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
 .DS_Store
 /build
-/captures
-.externalNativeBuild
-.cxx
+config/
+
+*/build
+.gradle/*
 local.properties
+*.ipr
+*.iws
+classes
+target
+pom.xml.*
+release.properties
+
+# IDEA/Android Studio project files, because
+# the project can be imported from settings.gradle.kts
+*.iml
+.idea/*
+!.idea/copyright
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Gradle files
+.gradle
+**/build
+
+# Gradle profiling report
+/reports
+
+# Profiling dump output folder of Android Studio
+captures/
+
+# Local configuration file (sdk path, etc)
+/local.properties
+
+# Code Sharing Encryption files
+/scripts
+
+# Checkstyle Config files
+**/config/**
+
+lint.xml
+
+*.hprof
+
+.editorconfig
