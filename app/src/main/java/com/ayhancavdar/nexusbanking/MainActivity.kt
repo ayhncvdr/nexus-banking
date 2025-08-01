@@ -13,44 +13,31 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.ayhancavdar.nexusbanking.ui.theme.NexusBankingTheme
+import androidx.navigation.compose.rememberNavController
+import com.ayhancavdar.nexusbanking.core.navigation.AppNavHost
+import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
+import com.ayhancavdar.nexusbanking.core.ui.components.AppBackground
+import com.ayhancavdar.nexusbanking.core.ui.theme.NexusBankingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             NexusBankingTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                val navController = rememberNavController()
+                AppBackground {
+                    AppNavHost(
+                        modifier = Modifier,
+                        navController = navController,
+                        startDestination = NexusBankingRoute.Splash
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NexusBankingTheme {
-        Greeting("Android")
     }
 }
