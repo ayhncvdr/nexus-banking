@@ -40,6 +40,10 @@ class ResultCallAdapterFactory : CallAdapter.Factory() {
         check(responseType is ParameterizedType) { "Response type must be parameterized as Result<T>" }
 
         val successType = getParameterUpperBound(0, responseType)
+        val rawSuccessType = getRawType(successType)
+        if (!BaseResponse::class.java.isAssignableFrom(rawSuccessType)) {
+            return null
+        }
         return ResultCallAdapter<BaseResponse>(successType)
     }
 }

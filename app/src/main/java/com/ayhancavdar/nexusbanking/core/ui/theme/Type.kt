@@ -20,6 +20,7 @@ import com.ayhancavdar.nexusbanking.R
 val roboto = FontFamily(
     Font(R.font.roboto_regular, FontWeight.Normal),
     Font(R.font.roboto_medium, FontWeight.Medium),
+    Font(R.font.roboto_semibold, FontWeight.SemiBold),
     Font(R.font.roboto_bold, FontWeight.Bold)
 )
 

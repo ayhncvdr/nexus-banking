@@ -14,13 +14,25 @@ import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
 class NBCookieJar : CookieJar {
-    private var cookies: List<Cookie>? = null
+    private val cookies = mutableMapOf<String, Cookie>()
 
     override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-        this.cookies = cookies
+        synchronized(this.cookies) {
+            cookies.forEach { cookie ->
+                if (cookie.matches(url)) {
+                    val key = "${cookie.name}-${cookie.domain}-${cookie.path}"
+                    this.cookies[key] = cookie
+                }
+            }
+        }
     }
 
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
-        return cookies.orEmpty()
+        synchronized(cookies) {
+            val now = System.currentTimeMillis()
+            return cookies.values.filter { cookie ->
+                cookie.matches(url) && (cookie.expiresAt == Long.MAX_VALUE || cookie.expiresAt > now)
+            }
+        }
     }
 }

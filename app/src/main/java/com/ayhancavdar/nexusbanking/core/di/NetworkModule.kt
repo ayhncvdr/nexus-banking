@@ -23,9 +23,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
 import javax.inject.Singleton
 import kotlinx.serialization.json.Json
+
+private const val TIMEOUT_SECONDS = 30L
 
 @Qualifier
 annotation class LoggingInterceptor
@@ -78,6 +81,9 @@ object NetworkModule {
             .cookieJar(cookieJar)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(headerInterceptor)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .build()
     }
 
