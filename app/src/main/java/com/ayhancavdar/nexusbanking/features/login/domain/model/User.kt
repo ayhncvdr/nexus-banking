@@ -7,18 +7,10 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.core.navigation
+package com.ayhancavdar.nexusbanking.features.login.domain.model
 
+import com.ayhancavdar.nexusbanking.features.login.data.model.SmsOtpNumber
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface NexusBankingRoute {
-    @Serializable
-    data object Splash : NexusBankingRoute
-
-    @Serializable
-    data object Login : NexusBankingRoute
-
-    @Serializable
-    data class Otp(val starredSmsNumber: String) : NexusBankingRoute
-}
+data class User(val customerName: String, val smsOtpNumbers: List<SmsOtpNumber>)

@@ -81,7 +81,7 @@ private val AppLightColorScheme = lightColorScheme(
 
 @Composable
 fun NexusBankingTheme(
-    useDarkTheme: Boolean = true,
+    useDarkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (useDarkTheme) {

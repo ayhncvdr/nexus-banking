@@ -7,14 +7,20 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.login.presentation
+package com.ayhancavdar.nexusbanking.features.login.presentation.navigation
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
+import com.ayhancavdar.nexusbanking.features.login.presentation.LoginScreen
 
-internal fun NavGraphBuilder.login() {
+internal fun NavGraphBuilder.login(navController: NavController) {
     composable<NexusBankingRoute.Login> {
-        LoginScreen()
+        LoginScreen(
+            onLoginSuccess = { starredSmsNumber ->
+                navController.navigate(NexusBankingRoute.Otp(starredSmsNumber = starredSmsNumber))
+            }
+        )
     }
 }
