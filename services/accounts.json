@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "errorId": 0,
+  "errorMsg": null,
+  "title": null,
+  "accounts": [
+    {
+      "id": "1-1",
+      "currency": "TL",
+      "name": "Maaş",
+      "iban": "TR670006296241457148714876",
+      "no": "1328",
+      "branchCode": "117",
+      "branchName": "Şişli",
+      "extensionNo": null,
+      "currentBalance": "2845",
+      "availableBalance": "4890",
+      "flexibleAccountLimit": "3000",
+      "type": "DEPOSIT_ACCOUNT",
+      "openingDate": "01.01.2025",
+      "additionalInfo": {}
+    },
+    {
+      "id": "1-2",
+      "currency": "USD",
+      "name": "Dolar Hesabı",
+      "iban": "TR220006254311694777475732",
+      "no": "1328",
+      "branchCode": "117",
+      "branchName": "Şişli",
+      "extensionNo": null,
+      "currentBalance": "100",
+      "availableBalance": "214",
+      "flexibleAccountLimit": "3000",
+      "type": "FIXED_ACCOUNT",
+      "openingDate": "01.01.2025",
+      "additionalInfo": {}
+    },
+    {
+      "id": "1-3",
+      "currency": "EUR",
+      "name": "Euro Hesabı",
+      "iban": "TR440006225669227535783114",
+      "no": "1328",
+      "branchCode": "117",
+      "branchName": "Şişli",
+      "extensionNo": null,
+      "currentBalance": "129",
+      "availableBalance": "285",
+      "flexibleAccountLimit": "3000",
+      "type": "DEPOSIT_ACCOUNT",
+      "openingDate": "01.01.2025",
+      "additionalInfo": {}
+    }
+  ]
+}
