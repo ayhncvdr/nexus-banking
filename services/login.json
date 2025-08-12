@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "errorId": 0,
+  "errorMsg": null,
+  "title": null,
+  "customerName": "Ayhan Cavdar",
+  "changePassword": false,
+  "newUser": false,
+  "customerId": "12000034",
+  "smsOtpNumbers": [
+    {
+      "number": "5555158168",
+      "starredNumber": "555 - *****68",
+      "id": "1"
+    },
+    {
+      "number": "5556448817",
+      "starredNumber": "555 - *****17",
+      "id": "2"
+    }
+  ],
+  "lastLoginInfo": {
+    "date": "2014-04-22T17:36:48.000+03:00",
+    "ip": null,
+    "channel": "1"
+  }
+}
