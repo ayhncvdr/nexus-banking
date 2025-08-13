@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -178,13 +180,16 @@ private fun WelcomeSection() {
             painter = painterResource(id = R.drawable.app_logo),
             contentDescription = "NexusBanking Logo",
             modifier = Modifier
-                .height(dimensionResource(id = R.dimen.x80))
+                .height(dimensionResource(id = R.dimen.x128))
+                .aspectRatio(1f)
                 .shadow(
                     elevation = dimensionResource(id = R.dimen.x4),
                     shape = CircleShape,
                     clip = false
-                ),
-            contentScale = ContentScale.Fit
+                )
+                .clip(CircleShape)
+                .background(Color.White),
+            contentScale = ContentScale.FillBounds
         )
 
         Spacer(Modifier.height(dimensionResource(id = R.dimen.x24)))
