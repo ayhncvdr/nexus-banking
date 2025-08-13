@@ -16,15 +16,15 @@
     <string name="generic_alert_title_warning">Warning</string>
 
     <!-- Login Screen -->
-    <string name="login_navigationBar_title">LOGIN</string>
+    <string name="login_welcome_title">Welcome Back</string>
+    <string name="login_welcome_subtitle">Sign in to access your account securely</string>
+    <string name="login_form_title">Sign In</string>
     <string name="login_username_textfield_placeholder">Username</string>
     <string name="login_password_textfield_placeholder">Password</string>
     <string name="login_rememberMe_label_text">Remember Me</string>
     <string name="login_login_button_title">Login</string>
     <string name="login_login_alert_okButton_title">OK</string>
     <string name="login_login_alert_cancelButton_title">Cancel</string>
-    <string name="login_languageSelection_TR_title">TR</string>
-    <string name="login_languageSelection_EN_title">EN</string>
     <string name="login_validation_error_username_required">Username is required</string>
     <string name="login_validation_error_username_length">Username must be 6 to 10 characters</string>
     <string name="login_validation_error_username_alphanumeric">Username must be alphanumeric</string>

@@ -16,15 +16,15 @@
     <string name="generic_alert_title_warning">Uyarı</string>
 
     <!-- Login Screen -->
-    <string name="login_navigationBar_title">GİRİŞ</string>
+    <string name="login_welcome_title">Tekrar Hoş Geldiniz</string>
+    <string name="login_welcome_subtitle">Hesabınıza güvenli bir şekilde giriş yapın</string>
+    <string name="login_form_title">Giriş Yap</string>
     <string name="login_username_textfield_placeholder">Kullanıcı Adı</string>
     <string name="login_password_textfield_placeholder">Şifre</string>
     <string name="login_rememberMe_label_text">Beni Hatırla</string>
     <string name="login_login_button_title">Giriş</string>
     <string name="login_login_alert_okButton_title">Tamam</string>
     <string name="login_login_alert_cancelButton_title">İptal</string>
-    <string name="login_languageSelection_TR_title">TR</string>
-    <string name="login_languageSelection_EN_title">EN</string>
     <string name="login_validation_error_username_required">Kullanıcı adı gerekli</string>
     <string name="login_validation_error_username_length">Kullanıcı adı 6 ile 10 karakter arasında olmalı</string>
     <string name="login_validation_error_username_alphanumeric">Kullanıcı adı alfanümerik olmalı</string>

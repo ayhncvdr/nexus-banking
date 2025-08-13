@@ -15,7 +15,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,31 +24,35 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ayhancavdar.nexusbanking.R
@@ -59,8 +63,6 @@ import com.ayhancavdar.nexusbanking.core.ui.theme.NBColors
 import com.ayhancavdar.nexusbanking.core.ui.theme.NexusBankingTheme
 import com.ayhancavdar.nexusbanking.features.login.presentation.state.LoginState
 import java.util.Locale
-
-private const val FORM_SPACER_HEIGHT_FACTOR = 0.01f
 
 @Composable
 fun LoginScreen(
@@ -102,77 +104,51 @@ private fun LoginScreenContent(
                 indication = null
             ) {
                 focusManager.clearFocus()
-            },
-        topBar = { LoginAppBar() }
+            }
     ) { innerPadding ->
-        BoxWithConstraints(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(NBColors.offWhite)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null
-                ) {
-                    focusManager.clearFocus()
-                }
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            NBColors.primaryGreen.copy(alpha = 0.05f),
+                            NBColors.offWhite,
+                            NBColors.primaryGreen.copy(alpha = 0.02f)
+                        )
+                    )
+                )
         ) {
-            val maxHeight = this.maxHeight
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
                     .verticalScroll(rememberScrollState())
-                    .padding(horizontal = dimensionResource(id = R.dimen.x40)),
+                    .padding(horizontal = dimensionResource(id = R.dimen.x24)),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Spacer(Modifier.height(maxHeight * FORM_SPACER_HEIGHT_FACTOR))
+                Spacer(Modifier.height(dimensionResource(id = R.dimen.x48)))
 
-                Image(
-                    painter = painterResource(id = R.drawable.app_logo),
-                    contentDescription = "NexusBanking Logo",
-                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.x32)),
-                    contentScale = ContentScale.Fit
-                )
+                // Welcome Section
+                WelcomeSection()
 
-                LoginForm(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = dimensionResource(id = R.dimen.x24)),
-                    username = uiState.usernameInput,
+                Spacer(Modifier.height(dimensionResource(id = R.dimen.x40)))
+
+                // Login Card
+                LoginCard(
+                    uiState = uiState,
                     onUsernameChange = onUsernameChange,
-                    usernameErrorRes = uiState.usernameError,
-                    password = uiState.passwordInput,
                     onPasswordChange = onPasswordChange,
-                    passwordErrorRes = uiState.passwordError,
+                    onRememberMeChange = onRememberMeChange,
+                    onAttemptLogin = onAttemptLogin
                 )
 
-                RememberMeSwitch(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = dimensionResource(id = R.dimen.x24)),
-                    checked = uiState.rememberMe,
-                    onCheckedChange = onRememberMeChange,
-                )
-
-                NBPrimaryButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = dimensionResource(id = R.dimen.x24)),
-                    onClick = onAttemptLogin,
-                    content = {
-                        Text(
-                            stringResource(id = R.string.login_login_button_title).uppercase(Locale.getDefault()),
-                            style = MaterialTheme.typography.labelLarge,
-                        )
-                    },
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.x12)),
-                    enabled = uiState.isLoginButtonEnabled,
-                )
+                Spacer(Modifier.height(dimensionResource(id = R.dimen.x24)))
             }
         }
     }
 
+    // Keep your existing alert dialog and navigation logic
     uiState.loginApiError?.let { errorMessage ->
         NBAlertDialog(
             onDismissRequest = onDismissLoginError,
@@ -193,21 +169,115 @@ private fun LoginScreenContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun LoginAppBar() {
-    CenterAlignedTopAppBar(
-        title = {
+private fun WelcomeSection() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.app_logo),
+            contentDescription = "NexusBanking Logo",
+            modifier = Modifier
+                .height(dimensionResource(id = R.dimen.x80))
+                .shadow(
+                    elevation = dimensionResource(id = R.dimen.x4),
+                    shape = CircleShape,
+                    clip = false
+                ),
+            contentScale = ContentScale.Fit
+        )
+
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.x24)))
+
+        Text(
+            text = stringResource(id = R.string.login_welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+            color = NBColors.nearBlack,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.x8)))
+
+        Text(
+            text = stringResource(id = R.string.login_welcome_subtitle),
+            style = MaterialTheme.typography.bodyLarge,
+            color = NBColors.primaryGreenLight,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun LoginCard(
+    uiState: LoginState,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onRememberMeChange: (Boolean) -> Unit,
+    onAttemptLogin: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(
+                elevation = dimensionResource(id = R.dimen.x8),
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.x16)),
+                clip = false
+            ),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.x16)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.x24))
+        ) {
             Text(
-                text = stringResource(id = R.string.login_navigationBar_title),
-                style = MaterialTheme.typography.headlineSmall,
+                text = stringResource(id = R.string.login_form_title),
+                style = MaterialTheme.typography.titleLarge,
+                color = NBColors.nearBlack,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.x24))
             )
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.Transparent,
-        ),
-        actions = {}
-    )
+
+            LoginForm(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(id = R.dimen.x20)),
+                username = uiState.usernameInput,
+                onUsernameChange = onUsernameChange,
+                usernameErrorRes = uiState.usernameError,
+                password = uiState.passwordInput,
+                onPasswordChange = onPasswordChange,
+                passwordErrorRes = uiState.passwordError,
+            )
+
+            RememberMeSwitch(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(id = R.dimen.x24)),
+                checked = uiState.rememberMe,
+                onCheckedChange = onRememberMeChange,
+            )
+
+            NBPrimaryButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(dimensionResource(id = R.dimen.x56)),
+                onClick = onAttemptLogin,
+                content = {
+                    Text(
+                        stringResource(id = R.string.login_login_button_title).uppercase(Locale.getDefault()),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.x12)),
+                enabled = uiState.isLoginButtonEnabled,
+            )
+        }
+    }
 }
 
 @Composable
