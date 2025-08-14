@@ -21,7 +21,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.ayhancavdar.nexusbanking.HiltTestRunner"
     }
 
     buildFeatures {
@@ -138,6 +138,17 @@ dependencies {
     kaptTest(libs.hilt.android.compiler)
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.android.compiler.v2562)
+
+    androidTestImplementation(libs.androidx.junit.v115)
+    androidTestImplementation(libs.androidx.espresso.core.v351)
+    androidTestImplementation(libs.androidx.runner.v152)
+    androidTestImplementation(libs.androidx.rules.v150)
+    androidTestImplementation(libs.androidx.espresso.intents)
+
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.androidx.junit.v130)
+    androidTestImplementation(libs.androidx.espresso.core.v370)
+    debugImplementation(libs.ui.test.manifest)
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
