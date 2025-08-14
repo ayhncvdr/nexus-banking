@@ -54,10 +54,14 @@ jobs:
       - name: Run Connected Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
           script: ./gradlew connectedDebugAndroidTest
 
       - name: Generate Test Coverage Reports
+        if: always()
         run: |
           ./gradlew createDebugUnitTestCoverageReport createDebugCoverageReport
 
