@@ -86,7 +86,7 @@ fun LoginScreen(
 }
 
 @Composable
-private fun LoginScreenContent(
+internal fun LoginScreenContent(
     uiState: LoginState,
     onLoginSuccess: (String) -> Unit,
     onUsernameChange: (String) -> Unit,
@@ -330,7 +330,9 @@ fun RememberMeSwitch(
     onCheckedChange: (Boolean) -> Unit,
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onCheckedChange(!checked) },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
