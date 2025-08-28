@@ -44,7 +44,26 @@ object MockResponses {
     {
       "success": false,
       "errorId": 1,
-      "errorMsg": "Giris basarisiz",
+      "errorMsg": "Login failed",
+      "title": "INFO"
+    }
+    """
+
+    const val OTP_SUCCESS = """
+    {
+      "success": true,
+      "errorId": 0,
+      "errorMsg": null,
+      "title": null,
+      "changeSecurityQuestion": false
+    }
+    """
+
+    const val OTP_ERROR = """
+    {
+      "success": false,
+      "errorId": 3,
+      "errorMsg": "User permission denied",
       "title": "INFO"
     }
     """

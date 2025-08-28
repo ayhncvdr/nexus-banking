@@ -7,7 +7,7 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.otp
+package com.ayhancavdar.nexusbanking.features.accounts
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,9 +21,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import com.ayhancavdar.nexusbanking.R
 
-// STOPSHIP: Implement OTP Screen
+// STOPSHIP: Implement Accounts Screen
 @Composable
-fun OtpScreen() {
+fun AccountsScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -31,7 +31,7 @@ fun OtpScreen() {
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            text = "OTP Screen",
+            text = "Accounts Screen",
             style = MaterialTheme.typography.titleLarge.copy(color = colorResource(id = R.color.white))
         )
     }

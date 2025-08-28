@@ -21,4 +21,7 @@ sealed interface NexusBankingRoute {
 
     @Serializable
     data class Otp(val starredSmsNumber: String) : NexusBankingRoute
+
+    @Serializable
+    data object Accounts : NexusBankingRoute
 }

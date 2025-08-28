@@ -7,14 +7,9 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.otp
+package com.ayhancavdar.nexusbanking.features.otp.data.model
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
+import kotlinx.serialization.Serializable
 
-internal fun NavGraphBuilder.otp() {
-    composable<NexusBankingRoute.Otp> {
-        OtpScreen()
-    }
-}
+@Serializable
+data class OtpRequest(val token: String)
