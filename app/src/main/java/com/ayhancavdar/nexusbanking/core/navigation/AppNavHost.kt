@@ -13,7 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.ayhancavdar.nexusbanking.features.login.presentation.login
+import com.ayhancavdar.nexusbanking.features.login.presentation.navigation.login
+import com.ayhancavdar.nexusbanking.features.otp.otp
 import com.ayhancavdar.nexusbanking.features.splash.splash
 
 @Composable
@@ -28,6 +29,7 @@ fun AppNavHost(
         modifier = modifier
     ) {
         splash(navController = navController)
-        login()
+        login(navController = navController)
+        otp()
     }
 }

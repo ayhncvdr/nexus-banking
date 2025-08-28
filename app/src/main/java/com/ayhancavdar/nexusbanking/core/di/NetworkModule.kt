@@ -10,6 +10,7 @@
 package com.ayhancavdar.nexusbanking.core.di
 
 import com.ayhancavdar.nexusbanking.core.network.AuthApiService
+import com.ayhancavdar.nexusbanking.core.network.MockInterceptor
 import com.ayhancavdar.nexusbanking.core.network.NBCookieJar
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -36,6 +37,9 @@ annotation class LoggingInterceptor
 @Qualifier
 annotation class HeaderInterceptor
 
+@Qualifier
+annotation class DebugInterceptor
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -47,7 +51,7 @@ object NetworkModule {
         client: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://raw.githubusercontent.com/ayhncvdr/nexus-banking/main/services/")
+            .baseUrl("https://raw.githubusercontent.com/ayhncvdr/nexus-banking/develop/services/")
             .client(client)
             .addCallAdapterFactory(ResultCallAdapterFactory())
             .addConverterFactory(converterFactory)
@@ -75,10 +79,12 @@ object NetworkModule {
     fun provideOkHttpClient(
         @LoggingInterceptor loggingInterceptor: Interceptor,
         @HeaderInterceptor headerInterceptor: Interceptor,
+        @DebugInterceptor debugInterceptor: Interceptor,
         cookieJar: CookieJar
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .cookieJar(cookieJar)
+            .addInterceptor(debugInterceptor)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(headerInterceptor)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -109,6 +115,11 @@ object NetworkModule {
             chain.proceed(requestWithHeaders)
         }
     }
+
+    @Provides
+    @Singleton
+    @DebugInterceptor
+    fun provideDebugInterceptor(): Interceptor = MockInterceptor()
 
     @Provides
     @Singleton

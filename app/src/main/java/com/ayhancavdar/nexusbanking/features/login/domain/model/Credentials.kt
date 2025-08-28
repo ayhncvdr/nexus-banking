@@ -7,14 +7,13 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.login.presentation
+package com.ayhancavdar.nexusbanking.features.login.domain.model
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
-
-internal fun NavGraphBuilder.login() {
-    composable<NexusBankingRoute.Login> {
-        LoginScreen()
+data class Credentials(
+    val username: String,
+    val password: String
+) {
+    override fun toString(): String {
+        return "Credentials(username='$username', password='***')"
     }
 }

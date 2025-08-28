@@ -21,7 +21,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.ayhancavdar.nexusbanking.HiltTestRunner"
     }
 
     buildFeatures {
@@ -34,6 +34,16 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     compileOptions {
@@ -43,6 +53,19 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/LICENSE"
+            excludes += "META-INF/LICENSE.txt"
+            excludes += "META-INF/NOTICE"
+            excludes += "META-INF/NOTICE.txt"
+        }
     }
 }
 
@@ -110,6 +133,32 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.turbine)
+    testImplementation(libs.robolectric)
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.truth)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.androidx.core.testing)
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler.v2562)
+
+    androidTestImplementation(libs.androidx.junit.v115)
+    androidTestImplementation(libs.androidx.espresso.core.v351)
+    androidTestImplementation(libs.androidx.runner.v152)
+    androidTestImplementation(libs.androidx.rules.v150)
+    androidTestImplementation(libs.androidx.espresso.intents)
+
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.androidx.junit.v130)
+    androidTestImplementation(libs.androidx.espresso.core.v370)
+    debugImplementation(libs.ui.test.manifest)
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {

@@ -1,3 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2025 Ayhan Cavdar. All Rights Reserved.
+  ~
+  ~ Save to the extent permitted by law, you may not use, copy, modify,
+  ~ distribute or create derivative works of this material or any part
+  ~ of it without the prior written consent of Ayhan Cavdar.
+  ~ Any reproduction of this material must contain this notice.
+  -->
+
 <resources>
     <string name="app_name">NexusBanking</string>
+
+    <!-- Generic -->
+    <string name="generic_alert_title_error">Error</string>
+    <string name="generic_alert_title_information">Information</string>
+    <string name="generic_alert_title_warning">Warning</string>
+
+    <!-- Login Screen -->
+    <string name="login_welcome_title">Welcome Back</string>
+    <string name="login_welcome_subtitle">Sign in to access your account securely</string>
+    <string name="login_form_title">Sign In</string>
+    <string name="login_username_textfield_placeholder">Username</string>
+    <string name="login_password_textfield_placeholder">Password</string>
+    <string name="login_rememberMe_label_text">Remember Me</string>
+    <string name="login_login_button_title">Login</string>
+    <string name="login_login_alert_okButton_title">OK</string>
+    <string name="login_login_alert_cancelButton_title">Cancel</string>
+    <string name="login_validation_error_username_required">Username is required</string>
+    <string name="login_validation_error_username_length">Username must be 6 to 10 characters</string>
+    <string name="login_validation_error_username_alphanumeric">Username must be alphanumeric</string>
+    <string name="login_validation_error_password_required">Password is required</string>
+    <string name="login_validation_error_password_length">Password must be 6 digits</string>
+    <string name="login_validation_error_password_numeric">Password must be numeric</string>
 </resources>

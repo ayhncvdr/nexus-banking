@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2025 Ayhan Cavdar. All Rights Reserved.
+  ~
+  ~ Save to the extent permitted by law, you may not use, copy, modify,
+  ~ distribute or create derivative works of this material or any part
+  ~ of it without the prior written consent of Ayhan Cavdar.
+  ~ Any reproduction of this material must contain this notice.
+  -->
+
+<resources>
+    <string name="app_name">NexusBanking</string>
+
+    <!-- Generic -->
+    <string name="generic_alert_title_error">Hata</string>
+    <string name="generic_alert_title_information">Bilgi</string>
+    <string name="generic_alert_title_warning">Uyarı</string>
+
+    <!-- Login Screen -->
+    <string name="login_welcome_title">Tekrar Hoş Geldiniz</string>
+    <string name="login_welcome_subtitle">Hesabınıza güvenli bir şekilde giriş yapın</string>
+    <string name="login_form_title">Giriş Yap</string>
+    <string name="login_username_textfield_placeholder">Kullanıcı Adı</string>
+    <string name="login_password_textfield_placeholder">Şifre</string>
+    <string name="login_rememberMe_label_text">Beni Hatırla</string>
+    <string name="login_login_button_title">Giriş</string>
+    <string name="login_login_alert_okButton_title">Tamam</string>
+    <string name="login_login_alert_cancelButton_title">İptal</string>
+    <string name="login_validation_error_username_required">Kullanıcı adı gerekli</string>
+    <string name="login_validation_error_username_length">Kullanıcı adı 6 ile 10 karakter arasında olmalı</string>
+    <string name="login_validation_error_username_alphanumeric">Kullanıcı adı alfanümerik olmalı</string>
+    <string name="login_validation_error_password_required">Şifre gerekli</string>
+    <string name="login_validation_error_password_length">Şifre 6 rakam olmalı</string>
+    <string name="login_validation_error_password_numeric">Şifre rakamlardan oluşmalı</string>
+</resources>
