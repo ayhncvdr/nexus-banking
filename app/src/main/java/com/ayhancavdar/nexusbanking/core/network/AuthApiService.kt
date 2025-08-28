@@ -11,6 +11,8 @@ package com.ayhancavdar.nexusbanking.core.network
 
 import com.ayhancavdar.nexusbanking.features.login.data.model.LoginRequest
 import com.ayhancavdar.nexusbanking.features.login.data.model.LoginResponse
+import com.ayhancavdar.nexusbanking.features.otp.data.model.OtpRequest
+import com.ayhancavdar.nexusbanking.features.otp.data.model.OtpResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -18,4 +20,7 @@ interface AuthApiService {
 
     @POST("login")
     suspend fun login(@Body request: LoginRequest): Result<LoginResponse>
+
+    @POST("otp")
+    suspend fun otp(@Body request: OtpRequest): Result<OtpResponse>
 }

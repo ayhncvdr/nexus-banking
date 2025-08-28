@@ -31,4 +31,11 @@
     <string name="login_validation_error_password_required">Şifre gerekli</string>
     <string name="login_validation_error_password_length">Şifre 6 rakam olmalı</string>
     <string name="login_validation_error_password_numeric">Şifre rakamlardan oluşmalı</string>
+
+    <!-- Otp Screen -->
+    <string name="otp_navigationBar_title">SMS Şifre ile Giriş</string>
+    <string name="otp_send_button_title">Gönder</string>
+    <string name="otp_phoneNumberInfo_label_text">%1$s numaralı telefonunuza SMS ile gönderilen şifreyi girin.</string>
+    <string name="otp_remainingTime_label_text">Kalan Süre</string>
+    <string name="otp_otp_textfield_placeholder">Tek Kullanımlık Şifre</string>
 </resources>

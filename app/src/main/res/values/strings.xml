@@ -31,4 +31,11 @@
     <string name="login_validation_error_password_required">Password is required</string>
     <string name="login_validation_error_password_length">Password must be 6 digits</string>
     <string name="login_validation_error_password_numeric">Password must be numeric</string>
+
+    <!-- Otp Screen -->
+    <string name="otp_navigationBar_title">Login with SMS OTP</string>
+    <string name="otp_send_button_title">Send</string>
+    <string name="otp_phoneNumberInfo_label_text">Enter the password sent via SMS to your phone number %1$s.</string>
+    <string name="otp_remainingTime_label_text">Remaining Time</string>
+    <string name="otp_otp_textfield_placeholder">One Time Password</string>
 </resources>
