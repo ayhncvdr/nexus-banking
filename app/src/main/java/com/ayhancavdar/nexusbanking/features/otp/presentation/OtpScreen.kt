@@ -44,7 +44,7 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -64,6 +64,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ayhancavdar.nexusbanking.R
 import com.ayhancavdar.nexusbanking.core.ui.components.NBAlertDialog
 import com.ayhancavdar.nexusbanking.core.ui.components.NBPrimaryButton
@@ -79,7 +80,7 @@ fun OtpScreen(
     onNavigateBack: () -> Unit,
     viewModel: OtpViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     OtpScreenContent(
         uiState = uiState,
@@ -169,9 +170,11 @@ private fun OtpScreenContent(
         )
     }
 
-    if (uiState.navigateToAccounts) {
-        onOtpSuccess()
-        onNavigationToAccounts()
+    LaunchedEffect(uiState.navigateToAccounts) {
+        if (uiState.navigateToAccounts) {
+            onOtpSuccess()
+            onNavigationToAccounts()
+        }
     }
 }
 
@@ -290,7 +293,7 @@ private fun OtpCard(
             // OTP input field
             NBTextField(
                 value = uiState.otpInput,
-                onValueChange = onOtpChange,
+                onValueChange = { onOtpChange(it.filter(Char::isDigit).take(6)) },
                 placeholderTextRes = R.string.login_password_textfield_placeholder,
                 isError = uiState.otpError != null,
                 errorTextRes = uiState.otpError,

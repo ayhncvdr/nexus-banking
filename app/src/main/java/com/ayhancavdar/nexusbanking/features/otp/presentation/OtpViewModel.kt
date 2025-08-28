@@ -87,22 +87,20 @@ class OtpViewModel @Inject constructor(
         }
 
         countdownJob = viewModelScope.launch(ioDispatcher) {
-            for (secondsDown in durationSeconds downTo 0) {
+            while (true) {
+                val now = SystemClock.elapsedRealtime()
+                val secondsDown = ((endTime - now) / DELAY_TIME).coerceAtLeast(0)
                 updateUiState {
                     it.copy(
                         countdownSeconds = secondsDown.toInt(),
                         formattedCountdown = formatTime(secondsDown),
-                        sliderProgress = secondsDown.toFloat() / OTP_TIMER_DURATION_SECONDS
+                        sliderProgress = (secondsDown.toFloat() / OTP_TIMER_DURATION_SECONDS).coerceIn(0f, 1f)
                     )
                 }
+                if (secondsDown == 0L) break
                 delay(DELAY_TIME)
             }
-
-            updateUiState {
-                it.copy(
-                    isTimerRunning = false, canResendOtp = true, sliderProgress = 0.0f
-                )
-            }
+            updateUiState { it.copy(isTimerRunning = false, canResendOtp = true, sliderProgress = 0f) }
         }
     }
 
@@ -202,7 +200,7 @@ class OtpViewModel @Inject constructor(
                     it.copy(
                         isLoading = false,
                         otpApiError = errorMessage,
-                        isContinueButtonEnabled = (it.otpError == null)
+                        isContinueButtonEnabled = (it.otpError == null) && it.countdownSeconds > 0
                     )
                 }
             })
