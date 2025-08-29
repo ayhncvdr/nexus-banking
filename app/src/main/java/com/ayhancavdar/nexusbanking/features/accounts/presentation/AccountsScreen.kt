@@ -7,7 +7,7 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.accounts
+package com.ayhancavdar.nexusbanking.features.accounts.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

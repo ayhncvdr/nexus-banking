@@ -7,14 +7,10 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.accounts
+package com.ayhancavdar.nexusbanking.features.accounts.domain.repository
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
-import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
+import com.ayhancavdar.nexusbanking.features.accounts.data.model.AccountsResponse
 
-internal fun NavGraphBuilder.accounts() {
-    composable<NexusBankingRoute.Accounts> {
-        AccountsScreen()
-    }
+interface AccountsRepository {
+    suspend fun getAccounts(): Result<AccountsResponse>
 }

@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.ayhancavdar.nexusbanking.features.accounts.accounts
+import com.ayhancavdar.nexusbanking.features.accounts.presentation.navigation.accounts
 import com.ayhancavdar.nexusbanking.features.login.presentation.navigation.login
 import com.ayhancavdar.nexusbanking.features.otp.presentation.navigation.otp
 import com.ayhancavdar.nexusbanking.features.splash.splash
