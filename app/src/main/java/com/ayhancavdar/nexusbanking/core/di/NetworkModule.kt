@@ -9,6 +9,7 @@
 
 package com.ayhancavdar.nexusbanking.core.di
 
+import com.ayhancavdar.nexusbanking.core.network.AccountsApiService
 import com.ayhancavdar.nexusbanking.core.network.AuthApiService
 import com.ayhancavdar.nexusbanking.core.network.MockInterceptor
 import com.ayhancavdar.nexusbanking.core.network.NBCookieJar
@@ -125,5 +126,11 @@ object NetworkModule {
     @Singleton
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAccountsApiService(retrofit: Retrofit): AccountsApiService {
+        return retrofit.create(AccountsApiService::class.java)
     }
 }

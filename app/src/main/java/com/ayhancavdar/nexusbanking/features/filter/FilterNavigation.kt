@@ -7,14 +7,14 @@
  * Any reproduction of this material must contain this notice.
  */
 
-package com.ayhancavdar.nexusbanking.features.accounts
+package com.ayhancavdar.nexusbanking.features.filter
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
 
-internal fun NavGraphBuilder.accounts() {
-    composable<NexusBankingRoute.Accounts> {
-        AccountsScreen()
+internal fun NavGraphBuilder.filter() {
+    composable<NexusBankingRoute.Filter> {
+        FilterScreen()
     }
 }

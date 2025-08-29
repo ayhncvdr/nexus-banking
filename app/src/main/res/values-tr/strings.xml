@@ -38,4 +38,13 @@
     <string name="otp_phoneNumberInfo_label_text">%1$s numaralı telefonunuza SMS ile gönderilen şifreyi girin.</string>
     <string name="otp_remainingTime_label_text">Kalan Süre</string>
     <string name="otp_otp_textfield_placeholder">Tek Kullanımlık Şifre</string>
+
+    <!-- Accounts Screen -->
+    <string name="accounts_navigationBar_title">Hesaplarım</string>
+    <string name="accounts_quit_alert_message">Çıkmak istediğinize emin misiniz?</string>
+    <string name="accounts_quit_alert_quitButton_title">Çıkış</string>
+    <string name="accounts_quit_alert_cancelButton_title">İptal</string>
+    <string name="accounts_availableBalance_label_text">Kullanılabilir Bakiye</string>
+    <string name="accounts_searchAccount_searchBar_placeholder">Hesap Arama</string>
+    <string name="accounts_last6Months_label_text">Son 6 Ay</string>
 </resources>

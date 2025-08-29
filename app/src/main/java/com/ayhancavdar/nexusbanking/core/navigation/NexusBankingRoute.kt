@@ -24,4 +24,10 @@ sealed interface NexusBankingRoute {
 
     @Serializable
     data object Accounts : NexusBankingRoute
+
+    @Serializable
+    data object Filter : NexusBankingRoute
+
+    @Serializable
+    data class AccountDetails(val accountIban: String) : NexusBankingRoute
 }
