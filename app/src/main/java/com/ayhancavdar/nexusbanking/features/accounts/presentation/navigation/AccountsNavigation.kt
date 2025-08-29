@@ -9,13 +9,28 @@
 
 package com.ayhancavdar.nexusbanking.features.accounts.presentation.navigation
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.AccountsScreen
 
-internal fun NavGraphBuilder.accounts() {
+internal fun NavGraphBuilder.accounts(navController: NavController) {
     composable<NexusBankingRoute.Accounts> {
-        AccountsScreen()
+        AccountsScreen(
+            onNavigateToLogin = {
+                navController.navigate(NexusBankingRoute.Login) {
+                    popUpTo<NexusBankingRoute.Accounts> {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToFilter = {
+                navController.navigate(NexusBankingRoute.Filter)
+            },
+            onNavigateToAccountDetails = { account ->
+                navController.navigate(NexusBankingRoute.AccountDetails(accountIban = account.iban.orEmpty()))
+            }
+        )
     }
 }

@@ -38,4 +38,13 @@
     <string name="otp_phoneNumberInfo_label_text">Enter the password sent via SMS to your phone number %1$s.</string>
     <string name="otp_remainingTime_label_text">Remaining Time</string>
     <string name="otp_otp_textfield_placeholder">One Time Password</string>
+
+    <!-- Accounts Screen -->
+    <string name="accounts_navigationBar_title">Accounts</string>
+    <string name="accounts_quit_alert_message">Are you sure you want to quit?</string>
+    <string name="accounts_quit_alert_quitButton_title">Quit</string>
+    <string name="accounts_quit_alert_cancelButton_title">Cancel</string>
+    <string name="accounts_availableBalance_label_text">Available Balance</string>
+    <string name="accounts_searchAccount_searchBar_placeholder">Search Account</string>
+    <string name="accounts_last6Months_label_text">Last 6 Months</string>
 </resources>
