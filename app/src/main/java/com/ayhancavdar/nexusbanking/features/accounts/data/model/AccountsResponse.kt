@@ -19,6 +19,6 @@ data class AccountsResponse(
     @SerialName("errorId") override val errorId: Int? = null,
     @SerialName("errorMsg") override val errorMsg: String? = null,
     @SerialName("title") override val title: String? = null,
-    @SerialName("accountTypes") val accountTypes: List<AccountType>? = null,
-    @SerialName("accounts") val accounts: List<Account>? = null
+    @SerialName("accountTypes") val accountTypes: List<AccountType> = emptyList(),
+    @SerialName("accounts") val accounts: List<Account> = emptyList()
 ) : BaseResponse

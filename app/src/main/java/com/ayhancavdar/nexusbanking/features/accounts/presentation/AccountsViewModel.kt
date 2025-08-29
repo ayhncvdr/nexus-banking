@@ -53,7 +53,7 @@ class AccountsViewModel @Inject constructor(
             val result = accountsRepository.getAccounts()
             result.fold(
                 onSuccess = { response ->
-                    val accounts = response.accounts.orEmpty()
+                    val accounts = response.accounts
                     val totalBalance = accounts.sumOf { account ->
                         account.availableBalance?.toDoubleOrNull() ?: DEFAULT_AVAILABLE_BALANCE
                     }
@@ -91,8 +91,9 @@ class AccountsViewModel @Inject constructor(
 
     //region UI State Management
     private fun updateUiState(update: (AccountsState) -> AccountsState) {
-        val newState = update(uiState.value)
-        savedStateHandle[ACCOUNTS_STATE_KEY] = newState
+        synchronized(savedStateHandle) {
+            savedStateHandle[ACCOUNTS_STATE_KEY] = update(uiState.value)
+        }
     }
     //endregion
 
