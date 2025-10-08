@@ -9,6 +9,7 @@
 
 package com.ayhancavdar.nexusbanking.features.filter
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -43,6 +44,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
@@ -61,8 +63,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -386,6 +388,7 @@ private fun CurrencySelectionRow(
     }
 }
 
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 private fun CurrencyOption(
     currency: CurrencyFilter,
@@ -393,7 +396,7 @@ private fun CurrencyOption(
     onSelectCurrency: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val resources = LocalResources.current
+    val resources = LocalContext.current.resources
 
     Box(
         modifier = modifier
@@ -549,7 +552,16 @@ private fun DateColumn(
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = constrainedDateMillis,
             yearRange = finalMinYear..finalMaxYear,
-            initialDisplayMode = DisplayMode.Picker
+            initialDisplayMode = DisplayMode.Picker,
+            selectableDates = object : SelectableDates {
+                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                    return utcTimeMillis in minDateMillis..maxDateMillis
+                }
+
+                override fun isSelectableYear(year: Int): Boolean {
+                    return year in finalMinYear..finalMaxYear
+                }
+            }
         )
 
         DatePickerDialog(

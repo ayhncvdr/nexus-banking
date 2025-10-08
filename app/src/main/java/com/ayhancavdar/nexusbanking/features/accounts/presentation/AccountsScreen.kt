@@ -49,7 +49,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -89,14 +89,18 @@ fun AccountsScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(backStackEntry) {
-        backStackEntry?.savedStateHandle?.getLiveData<FilterParameters>(FILTER_PARAMETER_KEY)
-            ?.observeForever { filterParameters ->
-                filterParameters?.let {
-                    viewModel.onFiltersApplied(it)
-                    backStackEntry.savedStateHandle.remove<FilterParameters>(FILTER_PARAMETER_KEY)
-                }
+    DisposableEffect(backStackEntry) {
+        if (backStackEntry == null) return@DisposableEffect onDispose { }
+        val liveData =
+            backStackEntry.savedStateHandle.getLiveData<FilterParameters>(FILTER_PARAMETER_KEY)
+        val observer = androidx.lifecycle.Observer<FilterParameters> { params ->
+            params.let {
+                viewModel.onFiltersApplied(it)
+                backStackEntry.savedStateHandle.remove<FilterParameters>(FILTER_PARAMETER_KEY)
             }
+        }
+        liveData.observeForever(observer)
+        onDispose { liveData.removeObserver(observer) }
     }
 
     AccountsScreenContent(

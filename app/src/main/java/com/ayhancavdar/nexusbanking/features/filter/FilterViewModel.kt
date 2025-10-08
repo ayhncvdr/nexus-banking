@@ -34,8 +34,9 @@ class FilterViewModel @Inject constructor(
 
     //region UI State Management
     private fun updateUiState(update: (FilterState) -> FilterState) {
-        val newState = update(uiState.value)
-        savedStateHandle[FILTER_STATE_KEY] = newState
+        synchronized(savedStateHandle) {
+            savedStateHandle[FILTER_STATE_KEY] = update(uiState.value)
+        }
     }
     //endregion
 
