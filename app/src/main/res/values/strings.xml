@@ -14,6 +14,8 @@
     <string name="generic_alert_title_error">Error</string>
     <string name="generic_alert_title_information">Information</string>
     <string name="generic_alert_title_warning">Warning</string>
+    <string name="generic_okButton_title">OK</string>
+    <string name="generic_cancelButton_title">Cancel</string>
 
     <!-- Login Screen -->
     <string name="login_welcome_title">Welcome Back</string>
@@ -23,8 +25,6 @@
     <string name="login_password_textfield_placeholder">Password</string>
     <string name="login_rememberMe_label_text">Remember Me</string>
     <string name="login_login_button_title">Login</string>
-    <string name="login_login_alert_okButton_title">OK</string>
-    <string name="login_login_alert_cancelButton_title">Cancel</string>
     <string name="login_validation_error_username_required">Username is required</string>
     <string name="login_validation_error_username_length">Username must be 6 to 10 characters</string>
     <string name="login_validation_error_username_alphanumeric">Username must be alphanumeric</string>
@@ -51,6 +51,8 @@
     <!-- Filter Screen -->
     <string name="filter_navigationBar_title">Filter</string>
     <string name="filter_reset_barButtonItem_title">Reset</string>
+    <string name="filter_filterText_label">Apply filters to customize your account view</string>
+    <string name="filter_filterOptions_title">Filter Options</string>
     <string name="filter_currency_label_text">Currency</string>
     <string name="filter_allButton_title">All</string>
     <string name="filter_tryButton_title">TL</string>

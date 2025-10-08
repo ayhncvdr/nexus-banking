@@ -229,7 +229,7 @@ private fun FilterHeaderSection() {
         Spacer(Modifier.height(dimensionResource(id = R.dimen.x8)))
 
         Text(
-            text = "Apply filters to customize your account view",
+            text = stringResource(id = R.string.filter_filterText_label),
             style = MaterialTheme.typography.bodyLarge,
             color = NBColors.primaryGreenLight,
             textAlign = TextAlign.Center
@@ -265,7 +265,7 @@ private fun FilterCard(
                 .padding(dimensionResource(id = R.dimen.x24))
         ) {
             Text(
-                text = "Filter Options",
+                text = stringResource(id = R.string.filter_filterOptions_title),
                 style = MaterialTheme.typography.titleLarge,
                 color = NBColors.nearBlack,
                 fontWeight = FontWeight.SemiBold,
@@ -274,7 +274,7 @@ private fun FilterCard(
 
             // Currency Selection Section
             Text(
-                text = "Currency",
+                text = stringResource(id = R.string.filter_currency_label_text),
                 style = MaterialTheme.typography.bodyLarge,
                 color = NBColors.nearBlack,
                 fontWeight = FontWeight.Medium,
@@ -289,7 +289,7 @@ private fun FilterCard(
 
             // Date Range Section
             Text(
-                text = "Date Range",
+                text = stringResource(id = R.string.filter_dateRange_label_text),
                 style = MaterialTheme.typography.bodyLarge,
                 color = NBColors.nearBlack,
                 fontWeight = FontWeight.Medium,
@@ -351,7 +351,7 @@ private fun FilterAppBar(
         actions = {
             TextButton(onClick = onResetFilter) {
                 Text(
-                    text = "RESET",
+                    text = stringResource(id = R.string.filter_reset_barButtonItem_title),
                     style = MaterialTheme.typography.bodyMedium,
                     color = NBColors.primaryGreen,
                     fontWeight = FontWeight.Medium
@@ -445,7 +445,7 @@ private fun DateRangeCard(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             DateColumn(
-                title = "Start Date",
+                title = stringResource(id = R.string.filter_startDate_label_text),
                 dateMillis = startDateMillis,
                 isStartDate = true,
                 onSelectDate = onSelectStartDate,
@@ -462,7 +462,7 @@ private fun DateRangeCard(
             )
 
             DateColumn(
-                title = "End Date",
+                title = stringResource(id = R.string.filter_endDate_label_text),
                 dateMillis = endDateMillis,
                 isStartDate = false,
                 onSelectDate = onSelectEndDate,
@@ -499,11 +499,6 @@ private fun DateColumn(
 
     val minYear = getYearFromMillis(minDateMillis)
     val maxYear = getYearFromMillis(maxDateMillis)
-    val constrainedYear = getYearFromMillis(constrainedDateMillis)
-    val originalYear = getYearFromMillis(dateMillis)
-
-    val finalMinYear = minOf(minYear, constrainedYear, originalYear)
-    val finalMaxYear = maxOf(maxYear, constrainedYear, originalYear)
 
     Column(
         modifier = modifier,
@@ -539,7 +534,7 @@ private fun DateColumn(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = formatDate(dateMillis),
+                text = formatDate(constrainedDateMillis),
                 style = MaterialTheme.typography.bodySmall,
                 color = NBColors.nearBlack
             )
@@ -551,7 +546,7 @@ private fun DateColumn(
     if (showDatePicker) {
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = constrainedDateMillis,
-            yearRange = finalMinYear..finalMaxYear,
+            yearRange = minYear..maxYear,
             initialDisplayMode = DisplayMode.Picker,
             selectableDates = object : SelectableDates {
                 override fun isSelectableDate(utcTimeMillis: Long): Boolean {
@@ -559,7 +554,7 @@ private fun DateColumn(
                 }
 
                 override fun isSelectableYear(year: Int): Boolean {
-                    return year in finalMinYear..finalMaxYear
+                    return year in minYear..maxYear
                 }
             }
         )
@@ -574,7 +569,7 @@ private fun DateColumn(
                     }
                 ) {
                     Text(
-                        text = "OK",
+                        text = stringResource(id = R.string.generic_okButton_title),
                         color = NBColors.primaryGreen
                     )
                 }
@@ -582,7 +577,7 @@ private fun DateColumn(
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
                     Text(
-                        text = "Cancel",
+                        text = stringResource(id = R.string.generic_cancelButton_title),
                         color = NBColors.primaryGreen
                     )
                 }

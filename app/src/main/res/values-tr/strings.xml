@@ -14,6 +14,8 @@
     <string name="generic_alert_title_error">Hata</string>
     <string name="generic_alert_title_information">Bilgi</string>
     <string name="generic_alert_title_warning">Uyarı</string>
+    <string name="generic_okButton_title">Tamam</string>
+    <string name="generic_cancelButton_title">İptal</string>
 
     <!-- Login Screen -->
     <string name="login_welcome_title">Tekrar Hoş Geldiniz</string>
@@ -23,8 +25,6 @@
     <string name="login_password_textfield_placeholder">Şifre</string>
     <string name="login_rememberMe_label_text">Beni Hatırla</string>
     <string name="login_login_button_title">Giriş</string>
-    <string name="login_login_alert_okButton_title">Tamam</string>
-    <string name="login_login_alert_cancelButton_title">İptal</string>
     <string name="login_validation_error_username_required">Kullanıcı adı gerekli</string>
     <string name="login_validation_error_username_length">Kullanıcı adı 6 ile 10 karakter arasında olmalı</string>
     <string name="login_validation_error_username_alphanumeric">Kullanıcı adı alfanümerik olmalı</string>
@@ -51,6 +51,8 @@
     <!-- Filter Screen -->
     <string name="filter_navigationBar_title">Filtre</string>
     <string name="filter_reset_barButtonItem_title">Sıfırla</string>
+    <string name="filter_filterText_label">Hesap görünümünüzü özelleştirmek için filtreler uygulayın</string>
+    <string name="filter_filterOptions_title">Filtre Seçenekleri</string>
     <string name="filter_currency_label_text">Para Birimi</string>
     <string name="filter_allButton_title">Hepsi</string>
     <string name="filter_tryButton_title">TL</string>
