@@ -47,4 +47,17 @@
     <string name="accounts_availableBalance_label_text">Available Balance</string>
     <string name="accounts_searchAccount_searchBar_placeholder">Search Account</string>
     <string name="accounts_last6Months_label_text">Last 6 Months</string>
+
+    <!-- Filter Screen -->
+    <string name="filter_navigationBar_title">Filter</string>
+    <string name="filter_reset_barButtonItem_title">Reset</string>
+    <string name="filter_currency_label_text">Currency</string>
+    <string name="filter_allButton_title">All</string>
+    <string name="filter_tryButton_title">TL</string>
+    <string name="filter_eurButton_title">EUR</string>
+    <string name="filter_usdButton_title">USD</string>
+    <string name="filter_dateRange_label_text">Date Range</string>
+    <string name="filter_startDate_label_text">Start Date</string>
+    <string name="filter_endDate_label_text">End Date</string>
+    <string name="filter_filterButton_title">Filter</string>
 </resources>

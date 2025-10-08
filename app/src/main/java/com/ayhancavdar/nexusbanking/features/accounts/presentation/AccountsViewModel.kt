@@ -14,9 +14,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ayhancavdar.nexusbanking.core.common.NBNetworkException
 import com.ayhancavdar.nexusbanking.core.di.IoDispatcher
+import com.ayhancavdar.nexusbanking.features.accounts.data.model.Account
 import com.ayhancavdar.nexusbanking.features.accounts.domain.repository.AccountsRepository
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.state.AccountsState
+import com.ayhancavdar.nexusbanking.features.filter.state.CurrencyFilter
+import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.IllegalFormatException
 import java.util.Locale
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
@@ -27,6 +35,8 @@ private const val ACCOUNTS_STATE_KEY = "accounts_state"
 private const val BALANCE_FORMAT = "%,.0f"
 private const val DEFAULT_CURRENCY = "TL"
 private const val DEFAULT_AVAILABLE_BALANCE = 0.0
+private const val DATE_FORMAT = "dd.MM.yyyy"
+private const val TIMEZONE_UTC = "UTC"
 
 @HiltViewModel
 class AccountsViewModel @Inject constructor(
@@ -57,13 +67,19 @@ class AccountsViewModel @Inject constructor(
                     val totalBalance = accounts.sumOf { account ->
                         account.availableBalance?.toDoubleOrNull() ?: DEFAULT_AVAILABLE_BALANCE
                     }
-                    val formattedBalance = String.format(Locale.getDefault(), BALANCE_FORMAT, totalBalance)
+                    val formattedBalance = try {
+                        String.format(Locale.getDefault(), BALANCE_FORMAT, totalBalance)
+                    } catch (e: IllegalFormatException) {
+                        "0"
+                    }
                     val defaultCurrency = accounts.firstOrNull()?.currency ?: DEFAULT_CURRENCY
 
                     updateUiState { currentState ->
+                        val filteredAccounts =
+                            applyFilters(accounts, currentState.searchText, currentState.appliedFilters)
                         currentState.copy(
                             accounts = accounts,
-                            filteredAccounts = accounts,
+                            filteredAccounts = filteredAccounts,
                             totalAvailableBalance = formattedBalance,
                             defaultCurrency = defaultCurrency,
                             isLoading = false
@@ -100,14 +116,11 @@ class AccountsViewModel @Inject constructor(
     //region Event Handlers
     fun onSearchTextChanged(searchText: String) {
         updateUiState { currentState ->
-            val filteredAccounts = if (searchText.isEmpty()) {
-                currentState.accounts
-            } else {
-                currentState.accounts.filter { account ->
-                    account.name?.contains(searchText, ignoreCase = true) == true ||
-                        account.branchName?.contains(searchText, ignoreCase = true) == true
-                }
-            }
+            val filteredAccounts = applyFilters(
+                accounts = currentState.accounts,
+                searchText = searchText,
+                filterParameters = currentState.appliedFilters,
+            )
             currentState.copy(
                 searchText = searchText,
                 filteredAccounts = filteredAccounts
@@ -117,9 +130,25 @@ class AccountsViewModel @Inject constructor(
 
     fun onClearSearch() {
         updateUiState { currentState ->
+            val filteredAccounts = applyFilters(currentState.accounts, "", currentState.appliedFilters)
             currentState.copy(
                 searchText = "",
-                filteredAccounts = currentState.accounts
+                filteredAccounts = filteredAccounts
+            )
+        }
+    }
+
+    fun onFiltersApplied(filterParameters: FilterParameters) {
+        updateUiState { currentState ->
+            val filteredAccounts = applyFilters(
+                accounts = currentState.accounts,
+                searchText = currentState.searchText,
+                filterParameters = filterParameters,
+            )
+
+            currentState.copy(
+                appliedFilters = filterParameters,
+                filteredAccounts = filteredAccounts
             )
         }
     }
@@ -146,6 +175,96 @@ class AccountsViewModel @Inject constructor(
                 showLogoutDialog = false
             )
         }
+    }
+    //endregion
+
+    //region Filter Logic
+    private fun applyFilters(
+        accounts: List<Account>,
+        searchText: String,
+        filterParameters: FilterParameters?
+    ): List<Account> {
+        var filteredAccounts = accounts
+
+        if (searchText.isNotEmpty()) {
+            filteredAccounts = filteredAccounts.filter { account ->
+                account.name?.contains(searchText, ignoreCase = true) == true ||
+                    account.branchName?.contains(searchText, ignoreCase = true) == true
+            }
+        }
+
+        filterParameters?.let { filters ->
+            filteredAccounts = filteredAccounts.filter { account ->
+                matchesCurrencyFilter(account, filters) && matchesDateFilter(account, filters)
+            }
+        }
+
+        return filteredAccounts
+    }
+
+    private fun matchesCurrencyFilter(
+        account: Account,
+        filterParameters: FilterParameters,
+    ): Boolean {
+        return when (filterParameters.selectedCurrency) {
+            is CurrencyFilter.All -> true
+            is CurrencyFilter.Specific ->
+                account.currency?.equals(filterParameters.selectedCurrency.code, ignoreCase = true) == true
+        }
+    }
+
+    private fun matchesDateFilter(
+        account: Account,
+        filterParameters: FilterParameters
+    ): Boolean {
+        val accountOpeningDate = parseAccountOpeningDate(account.openingDate) ?: return true
+
+        val startDate = Date(filterParameters.startDateMillis)
+        val endDate = Date(filterParameters.endDateMillis)
+
+        val normalizedStartDate = normalizeToStartOfDay(startDate)
+        val normalizedEndDate = normalizeToEndOfDay(endDate)
+        val normalizedAccountDate = normalizeToStartOfDay(accountOpeningDate)
+
+        return !normalizedAccountDate.before(normalizedStartDate) && !normalizedAccountDate.after(normalizedEndDate)
+    }
+
+    private fun parseAccountOpeningDate(openingDateString: String?): Date? {
+        if (openingDateString.isNullOrEmpty()) return null
+
+        val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+
+        try {
+            formatter.timeZone = java.util.TimeZone.getTimeZone(TIMEZONE_UTC)
+            val date = formatter.parse(openingDateString)
+            return date
+        } catch (e: ParseException) {
+            /* No op */
+        }
+
+        return null
+    }
+
+    private fun normalizeToStartOfDay(date: Date): Date {
+        val calendar = Calendar.getInstance(java.util.TimeZone.getTimeZone(TIMEZONE_UTC)).apply {
+            time = date
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        return calendar.time
+    }
+
+    private fun normalizeToEndOfDay(date: Date): Date {
+        val calendar = Calendar.getInstance(java.util.TimeZone.getTimeZone(TIMEZONE_UTC)).apply {
+            time = date
+            set(Calendar.HOUR_OF_DAY, 23)
+            set(Calendar.MINUTE, 59)
+            set(Calendar.SECOND, 59)
+            set(Calendar.MILLISECOND, 999)
+        }
+        return calendar.time
     }
     //endregion
 }

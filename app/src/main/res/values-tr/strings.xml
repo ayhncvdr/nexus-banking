@@ -47,4 +47,18 @@
     <string name="accounts_availableBalance_label_text">Kullanılabilir Bakiye</string>
     <string name="accounts_searchAccount_searchBar_placeholder">Hesap Arama</string>
     <string name="accounts_last6Months_label_text">Son 6 Ay</string>
+
+    <!-- Filter Screen -->
+    <string name="filter_navigationBar_title">Filtre</string>
+    <string name="filter_reset_barButtonItem_title">Sıfırla</string>
+    <string name="filter_currency_label_text">Para Birimi</string>
+    <string name="filter_allButton_title">Hepsi</string>
+    <string name="filter_tryButton_title">TL</string>
+    <string name="filter_eurButton_title">EUR</string>
+    <string name="filter_usdButton_title">USD</string>
+    <string name="filter_dateRange_label_text">Tarih Aralığı</string>
+    <string name="filter_startDate_label_text">Başlangıç Tarihi</string>
+    <string name="filter_endDate_label_text">Bitiş Tarihi</string>
+    <string name="filter_filterButton_title">Filtre</string>
+
 </resources>

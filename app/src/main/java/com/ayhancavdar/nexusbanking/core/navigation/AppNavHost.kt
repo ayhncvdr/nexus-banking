@@ -35,7 +35,7 @@ fun AppNavHost(
         login(navController = navController)
         otp(navController = navController)
         accounts(navController = navController)
-        filter()
+        filter(navController = navController)
         accountDetails()
     }
 }

@@ -16,7 +16,7 @@ import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.AccountsScreen
 
 internal fun NavGraphBuilder.accounts(navController: NavController) {
-    composable<NexusBankingRoute.Accounts> {
+    composable<NexusBankingRoute.Accounts> { backStackEntry ->
         AccountsScreen(
             onNavigateToLogin = {
                 navController.navigate(NexusBankingRoute.Login) {
@@ -25,12 +25,16 @@ internal fun NavGraphBuilder.accounts(navController: NavController) {
                     }
                 }
             },
-            onNavigateToFilter = {
+            onNavigateToFilter = { currentFilters ->
+                navController.currentBackStackEntry
+                    ?.savedStateHandle
+                    ?.set("currentFilterParameters", currentFilters)
                 navController.navigate(NexusBankingRoute.Filter)
             },
             onNavigateToAccountDetails = { account ->
                 navController.navigate(NexusBankingRoute.AccountDetails(accountIban = account.iban.orEmpty()))
-            }
+            },
+            backStackEntry = backStackEntry
         )
     }
 }

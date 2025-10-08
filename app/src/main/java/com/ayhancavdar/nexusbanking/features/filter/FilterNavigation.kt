@@ -9,12 +9,29 @@
 
 package com.ayhancavdar.nexusbanking.features.filter
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
+import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 
-internal fun NavGraphBuilder.filter() {
+internal fun NavGraphBuilder.filter(navController: NavController) {
     composable<NexusBankingRoute.Filter> {
-        FilterScreen()
+        val initialFilterParameters = navController.previousBackStackEntry
+            ?.savedStateHandle
+            ?.get<FilterParameters>("currentFilterParameters")
+
+        FilterScreen(
+            initialFilterParameters = initialFilterParameters,
+            onNavigateBack = {
+                navController.popBackStack()
+            },
+            onApplyFilter = { filterParameters ->
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.set("filterParameters", filterParameters)
+                navController.popBackStack()
+            }
+        )
     }
 }
