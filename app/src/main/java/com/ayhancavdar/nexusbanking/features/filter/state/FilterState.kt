@@ -13,6 +13,7 @@ import android.os.Parcelable
 import androidx.compose.runtime.Immutable
 import java.util.Calendar
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 @Immutable
 @Parcelize
@@ -38,6 +39,7 @@ data class FilterState(
     }
 }
 
+@Serializable
 @Parcelize
 data class FilterParameters(
     val selectedCurrency: CurrencyFilter = CurrencyFilter.All,

@@ -49,7 +49,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,7 +69,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavBackStackEntry
 import com.ayhancavdar.nexusbanking.R
 import com.ayhancavdar.nexusbanking.core.ui.theme.NBColors
 import com.ayhancavdar.nexusbanking.core.ui.theme.NexusBankingTheme
@@ -77,30 +76,20 @@ import com.ayhancavdar.nexusbanking.features.accounts.data.model.Account
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.state.AccountsState
 import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 
-private const val FILTER_PARAMETER_KEY = "filterParameters"
-
 @Composable
 fun AccountsScreen(
     viewModel: AccountsViewModel = hiltViewModel(),
+    filterResult: FilterParameters? = null,
     onNavigateToLogin: () -> Unit = {},
     onNavigateToFilter: (FilterParameters?) -> Unit = {},
     onNavigateToAccountDetails: (Account) -> Unit = {},
-    backStackEntry: NavBackStackEntry? = null,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    DisposableEffect(backStackEntry) {
-        if (backStackEntry == null) return@DisposableEffect onDispose { }
-        val liveData =
-            backStackEntry.savedStateHandle.getLiveData<FilterParameters>(FILTER_PARAMETER_KEY)
-        val observer = androidx.lifecycle.Observer<FilterParameters> { params ->
-            params.let {
-                viewModel.onFiltersApplied(it)
-                backStackEntry.savedStateHandle.remove<FilterParameters>(FILTER_PARAMETER_KEY)
-            }
+    LaunchedEffect(filterResult) {
+        filterResult?.let { params ->
+            viewModel.onFiltersApplied(params)
         }
-        liveData.observeForever(observer)
-        onDispose { liveData.removeObserver(observer) }
     }
 
     AccountsScreenContent(

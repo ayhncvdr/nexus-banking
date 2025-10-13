@@ -13,12 +13,16 @@ import android.content.res.Resources
 import android.os.Parcelable
 import com.ayhancavdar.nexusbanking.R
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Parcelize
 sealed class CurrencyFilter : Parcelable {
+    @Serializable
     @Parcelize
     data object All : CurrencyFilter()
 
+    @Serializable
     @Parcelize
     data class Specific(val code: String) : CurrencyFilter()
 }
