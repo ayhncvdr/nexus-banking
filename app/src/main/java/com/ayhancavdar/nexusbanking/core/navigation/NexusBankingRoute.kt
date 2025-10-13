@@ -9,6 +9,7 @@
 
 package com.ayhancavdar.nexusbanking.core.navigation
 
+import com.ayhancavdar.nexusbanking.features.filter.navigation.FilterParametersNavType
 import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 import kotlin.reflect.typeOf
 import kotlinx.serialization.Serializable
