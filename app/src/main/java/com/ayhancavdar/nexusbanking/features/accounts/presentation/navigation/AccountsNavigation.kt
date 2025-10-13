@@ -17,10 +17,12 @@ import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.AccountsScreen
 import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 
+private const val FILTER_RESULT_KEY = "filterParameters"
+
 internal fun NavGraphBuilder.accounts(navController: NavController) {
     composable<NexusBankingRoute.Accounts> { backStackEntry ->
         val filterResult = backStackEntry.savedStateHandle
-            .getStateFlow<FilterParameters?>("filterParameters", null)
+            .getStateFlow<FilterParameters?>(FILTER_RESULT_KEY, null)
             .collectAsState()
 
         AccountsScreen(
@@ -39,5 +41,9 @@ internal fun NavGraphBuilder.accounts(navController: NavController) {
                 navController.navigate(NexusBankingRoute.AccountDetails(accountIban = account.iban.orEmpty()))
             }
         )
+
+        filterResult.value?.let {
+            backStackEntry.savedStateHandle.remove<FilterParameters?>(FILTER_RESULT_KEY)
+        }
     }
 }
