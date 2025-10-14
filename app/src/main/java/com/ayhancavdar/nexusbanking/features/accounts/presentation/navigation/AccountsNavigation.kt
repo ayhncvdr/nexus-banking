@@ -41,9 +41,5 @@ internal fun NavGraphBuilder.accounts(navController: NavController) {
                 navController.navigate(NexusBankingRoute.AccountDetails(accountIban = account.iban.orEmpty()))
             }
         )
-
-        filterResult.value?.let {
-            backStackEntry.savedStateHandle.remove<FilterParameters?>(FILTER_RESULT_KEY)
-        }
     }
 }
