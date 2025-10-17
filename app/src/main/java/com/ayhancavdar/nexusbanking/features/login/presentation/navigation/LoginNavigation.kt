@@ -18,8 +18,13 @@ import com.ayhancavdar.nexusbanking.features.login.presentation.LoginScreen
 internal fun NavGraphBuilder.login(navController: NavController) {
     composable<NexusBankingRoute.Login> {
         LoginScreen(
-            onLoginSuccess = { starredSmsNumber ->
-                navController.navigate(NexusBankingRoute.Otp(starredSmsNumber = starredSmsNumber))
+            onLoginSuccess = { customerName, starredSmsNumber ->
+                navController.navigate(
+                    NexusBankingRoute.Otp(
+                        customerName = customerName,
+                        starredSmsNumber = starredSmsNumber
+                    )
+                )
             }
         )
     }

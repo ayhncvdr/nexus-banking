@@ -68,7 +68,7 @@ import java.util.Locale
 
 @Composable
 fun LoginScreen(
-    onLoginSuccess: (String) -> Unit,
+    onLoginSuccess: (customerName: String, starredSmsNumber: String) -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -88,7 +88,7 @@ fun LoginScreen(
 @Composable
 internal fun LoginScreenContent(
     uiState: LoginState,
-    onLoginSuccess: (String) -> Unit,
+    onLoginSuccess: (customerName: String, starredSmsNumber: String) -> Unit,
     onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onRememberMeChange: (Boolean) -> Unit,
@@ -163,11 +163,9 @@ internal fun LoginScreenContent(
         )
     }
 
-    uiState.starredSmsNumber.let { starredSmsNumber ->
-        if (!starredSmsNumber.isNullOrEmpty()) {
-            onLoginSuccess(starredSmsNumber)
-            onNavigationToOtp()
-        }
+    if (!uiState.customerName.isNullOrEmpty() && !uiState.starredSmsNumber.isNullOrEmpty()) {
+        onLoginSuccess(uiState.customerName, uiState.starredSmsNumber)
+        onNavigationToOtp()
     }
 }
 
@@ -367,7 +365,7 @@ private fun LoginScreenPreview() {
                 rememberMe = true,
                 isLoginButtonEnabled = true
             ),
-            onLoginSuccess = {},
+            onLoginSuccess = { _, _ -> },
             onUsernameChange = {},
             onPasswordChange = {},
             onRememberMeChange = {},

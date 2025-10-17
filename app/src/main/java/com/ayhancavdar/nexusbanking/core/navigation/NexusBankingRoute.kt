@@ -23,10 +23,10 @@ sealed interface NexusBankingRoute {
     data object Login : NexusBankingRoute
 
     @Serializable
-    data class Otp(val starredSmsNumber: String) : NexusBankingRoute
+    data class Otp(val customerName: String, val starredSmsNumber: String) : NexusBankingRoute
 
     @Serializable
-    data object Accounts : NexusBankingRoute
+    data class Accounts(val customerName: String) : NexusBankingRoute
 
     @Serializable
     data class Filter(val filterParameters: FilterParameters? = null) : NexusBankingRoute {

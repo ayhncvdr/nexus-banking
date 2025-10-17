@@ -21,8 +21,8 @@ internal fun NavGraphBuilder.otp(navController: NavController) {
             onNavigateBack = {
                 navController.popBackStack()
             },
-            onOtpSuccess = {
-                navController.navigate(NexusBankingRoute.Accounts) {
+            onOtpSuccess = { customerName ->
+                navController.navigate(NexusBankingRoute.Accounts(customerName = customerName)) {
                     popUpTo<NexusBankingRoute.Login> {
                         inclusive = true
                     }

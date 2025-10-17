@@ -12,8 +12,10 @@ package com.ayhancavdar.nexusbanking.features.accounts.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.ayhancavdar.nexusbanking.core.common.NBNetworkException
 import com.ayhancavdar.nexusbanking.core.di.IoDispatcher
+import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
 import com.ayhancavdar.nexusbanking.features.accounts.data.model.Account
 import com.ayhancavdar.nexusbanking.features.accounts.domain.repository.AccountsRepository
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.state.AccountsState
@@ -45,10 +47,12 @@ class AccountsViewModel @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
+    private val accountsArgs: NexusBankingRoute.Accounts = savedStateHandle.toRoute()
+
     //region State
     val uiState: StateFlow<AccountsState> = savedStateHandle.getStateFlow(
         ACCOUNTS_STATE_KEY,
-        AccountsState()
+        AccountsState(customerName = accountsArgs.customerName)
     )
     //endregion
 

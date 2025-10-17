@@ -53,7 +53,7 @@ class OtpViewModel @Inject constructor(
     //region State
     val uiState: StateFlow<OtpState> = savedStateHandle.getStateFlow(
         OTP_STATE_KEY,
-        OtpState(starredSmsNumber = otpArgs.starredSmsNumber)
+        OtpState(customerName = otpArgs.customerName, starredSmsNumber = otpArgs.starredSmsNumber)
     )
     //endregion
 
