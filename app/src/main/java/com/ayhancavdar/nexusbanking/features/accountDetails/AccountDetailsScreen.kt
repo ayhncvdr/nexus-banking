@@ -255,7 +255,11 @@ private fun AccountDetailItemWithShare(
                         type = "text/plain"
                     }
                     val shareIntent = android.content.Intent.createChooser(sendIntent, null)
-                    context.startActivity(shareIntent)
+                    try {
+                        context.startActivity(shareIntent)
+                    } catch (e: android.content.ActivityNotFoundException) {
+                        /*No op*/
+                    }
                 },
                 modifier = Modifier.size(dimensionResource(id = R.dimen.x32))
             ) {
