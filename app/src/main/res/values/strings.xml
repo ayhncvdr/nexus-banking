@@ -62,4 +62,13 @@
     <string name="filter_startDate_label_text">Start Date</string>
     <string name="filter_endDate_label_text">End Date</string>
     <string name="filter_filterButton_title">Filter</string>
+
+    <!-- Account Details Screen -->
+    <string name = "accountDetails_navigationBar_title">Account Details</string>
+    <string name = "accountDetails_availableBalance_label_text">Available Balance</string>
+    <string name = "accountDetails_accountName_label_text">Account Name</string>
+    <string name = "accountDetails_iban_label_text">IBAN</string>
+    <string name = "accountDetails_accountNumber_label_text">Account Number</string>
+    <string name = "accountDetails_branch_label_text">Branch</string>
+
 </resources>
