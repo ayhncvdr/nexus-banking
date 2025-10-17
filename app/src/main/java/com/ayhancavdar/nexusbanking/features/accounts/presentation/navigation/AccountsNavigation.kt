@@ -37,8 +37,10 @@ internal fun NavGraphBuilder.accounts(navController: NavController) {
             onNavigateToFilter = { currentFilters ->
                 navController.navigate(NexusBankingRoute.Filter(filterParameters = currentFilters))
             },
-            onNavigateToAccountDetails = { account ->
-                navController.navigate(NexusBankingRoute.AccountDetails(accountIban = account.iban.orEmpty()))
+            onNavigateToAccountDetails = { customerName, account ->
+                navController.navigate(
+                    NexusBankingRoute.AccountDetails(customerName = customerName, account = account)
+                )
             }
         )
     }

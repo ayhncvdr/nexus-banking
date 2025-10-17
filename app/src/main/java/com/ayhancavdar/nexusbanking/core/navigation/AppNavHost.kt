@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.ayhancavdar.nexusbanking.features.accountDetails.accountDetails
+import com.ayhancavdar.nexusbanking.features.accountDetails.navigation.accountDetails
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.navigation.accounts
 import com.ayhancavdar.nexusbanking.features.filter.navigation.filter
 import com.ayhancavdar.nexusbanking.features.login.presentation.navigation.login
@@ -36,6 +36,6 @@ fun AppNavHost(
         otp(navController = navController)
         accounts(navController = navController)
         filter(navController = navController)
-        accountDetails()
+        accountDetails(navController = navController)
     }
 }
