@@ -49,6 +49,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -73,15 +74,23 @@ import com.ayhancavdar.nexusbanking.core.ui.theme.NBColors
 import com.ayhancavdar.nexusbanking.core.ui.theme.NexusBankingTheme
 import com.ayhancavdar.nexusbanking.features.accounts.data.model.Account
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.state.AccountsState
+import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 
 @Composable
 fun AccountsScreen(
     viewModel: AccountsViewModel = hiltViewModel(),
+    filterResult: FilterParameters? = null,
     onNavigateToLogin: () -> Unit = {},
-    onNavigateToFilter: () -> Unit = {},
+    onNavigateToFilter: (FilterParameters?) -> Unit = {},
     onNavigateToAccountDetails: (Account) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(filterResult) {
+        filterResult?.let { params ->
+            viewModel.onFiltersApplied(params)
+        }
+    }
 
     AccountsScreenContent(
         uiState = uiState,
@@ -93,7 +102,7 @@ fun AccountsScreen(
             onNavigateToLogin()
         },
         onLogoutCancel = viewModel::onLogoutCancel,
-        onNavigateToFilter = onNavigateToFilter,
+        onNavigateToFilter = { onNavigateToFilter(uiState.appliedFilters) },
         onNavigateToAccountDetails = onNavigateToAccountDetails,
     )
 }

@@ -156,8 +156,8 @@ internal fun LoginScreenContent(
             onDismissRequest = onDismissLoginError,
             title = R.string.generic_alert_title_error,
             text = errorMessage,
-            confirmButtonText = R.string.login_login_alert_okButton_title,
-            dismissButtonText = R.string.login_login_alert_cancelButton_title,
+            confirmButtonText = R.string.generic_okButton_title,
+            dismissButtonText = R.string.generic_cancelButton_title,
             confirmButtonOnClick = onDismissLoginError,
             dismissButtonOnClick = onDismissLoginError,
         )

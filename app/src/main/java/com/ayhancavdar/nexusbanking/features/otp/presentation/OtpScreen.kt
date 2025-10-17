@@ -161,9 +161,9 @@ private fun OtpScreenContent(
     uiState.otpApiError?.let { errorMessage ->
         NBAlertDialog(
             confirmButtonOnClick = onDismissOtpError,
-            confirmButtonText = R.string.login_login_alert_okButton_title,
+            confirmButtonText = R.string.generic_okButton_title,
             dismissButtonOnClick = onDismissOtpError,
-            dismissButtonText = R.string.login_login_alert_cancelButton_title,
+            dismissButtonText = R.string.generic_cancelButton_title,
             onDismissRequest = onDismissOtpError,
             text = errorMessage,
             title = R.string.generic_alert_title_error,

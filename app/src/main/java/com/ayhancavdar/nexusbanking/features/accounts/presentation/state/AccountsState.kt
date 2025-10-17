@@ -12,6 +12,7 @@ package com.ayhancavdar.nexusbanking.features.accounts.presentation.state
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
 import com.ayhancavdar.nexusbanking.features.accounts.data.model.Account
+import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
 import kotlinx.parcelize.Parcelize
 
 @Immutable
@@ -25,4 +26,5 @@ data class AccountsState(
     val isLoading: Boolean = false,
     val accountsApiError: String? = null,
     val showLogoutDialog: Boolean = false,
+    val appliedFilters: FilterParameters? = null,
 ) : Parcelable

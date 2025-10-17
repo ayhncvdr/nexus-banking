@@ -9,15 +9,24 @@
 
 package com.ayhancavdar.nexusbanking.features.accounts.presentation.navigation
 
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.ayhancavdar.nexusbanking.core.navigation.NexusBankingRoute
 import com.ayhancavdar.nexusbanking.features.accounts.presentation.AccountsScreen
+import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
+
+private const val FILTER_RESULT_KEY = "filterParameters"
 
 internal fun NavGraphBuilder.accounts(navController: NavController) {
-    composable<NexusBankingRoute.Accounts> {
+    composable<NexusBankingRoute.Accounts> { backStackEntry ->
+        val filterResult = backStackEntry.savedStateHandle
+            .getStateFlow<FilterParameters?>(FILTER_RESULT_KEY, null)
+            .collectAsState()
+
         AccountsScreen(
+            filterResult = filterResult.value,
             onNavigateToLogin = {
                 navController.navigate(NexusBankingRoute.Login) {
                     popUpTo<NexusBankingRoute.Accounts> {
@@ -25,8 +34,8 @@ internal fun NavGraphBuilder.accounts(navController: NavController) {
                     }
                 }
             },
-            onNavigateToFilter = {
-                navController.navigate(NexusBankingRoute.Filter)
+            onNavigateToFilter = { currentFilters ->
+                navController.navigate(NexusBankingRoute.Filter(filterParameters = currentFilters))
             },
             onNavigateToAccountDetails = { account ->
                 navController.navigate(NexusBankingRoute.AccountDetails(accountIban = account.iban.orEmpty()))
