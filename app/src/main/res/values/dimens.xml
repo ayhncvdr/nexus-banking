@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2025 Ayhan Cavdar. All Rights Reserved.
+  ~
+  ~ Save to the extent permitted by law, you may not use, copy, modify,
+  ~ distribute or create derivative works of this material or any part
+  ~ of it without the prior written consent of Ayhan Cavdar.
+  ~ Any reproduction of this material must contain this notice.
+  -->
+
+<resources>
+    <dimen name="x0">0dp</dimen>
+    <dimen name="x2">2dp</dimen>
+    <dimen name="x4">4dp</dimen>
+    <dimen name="x8">8dp</dimen>
+    <dimen name="x12">12dp</dimen>
+    <dimen name="x16">16dp</dimen>
+    <dimen name="x20">20dp</dimen>
+    <dimen name="x24">24dp</dimen>
+    <dimen name="x32">32dp</dimen>
+    <dimen name="x40">40dp</dimen>
+    <dimen name="x48">48dp</dimen>
+    <dimen name="x56">56dp</dimen>
+    <dimen name="x64">64dp</dimen>
+    <dimen name="x80">80dp</dimen>
+    <dimen name="x128">128dp</dimen>
+    <dimen name="x256">256dp</dimen>
+</resources>

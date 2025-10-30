@@ -1,3 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2025 Ayhan Cavdar. All Rights Reserved.
+  ~
+  ~ Save to the extent permitted by law, you may not use, copy, modify,
+  ~ distribute or create derivative works of this material or any part
+  ~ of it without the prior written consent of Ayhan Cavdar.
+  ~ Any reproduction of this material must contain this notice.
+  -->
+
 <resources>
     <string name="app_name">NexusBanking</string>
+
+    <!-- Generic -->
+    <string name="generic_alert_title_error">Error</string>
+    <string name="generic_alert_title_information">Information</string>
+    <string name="generic_alert_title_warning">Warning</string>
+    <string name="generic_okButton_title">OK</string>
+    <string name="generic_cancelButton_title">Cancel</string>
+
+    <!-- Login Screen -->
+    <string name="login_welcome_title">Welcome Back</string>
+    <string name="login_welcome_subtitle">Sign in to access your account securely</string>
+    <string name="login_form_title">Sign In</string>
+    <string name="login_username_textfield_placeholder">Username</string>
+    <string name="login_password_textfield_placeholder">Password</string>
+    <string name="login_rememberMe_label_text">Remember Me</string>
+    <string name="login_login_button_title">Login</string>
+    <string name="login_validation_error_username_required">Username is required</string>
+    <string name="login_validation_error_username_length">Username must be 6 to 10 characters</string>
+    <string name="login_validation_error_username_alphanumeric">Username must be alphanumeric</string>
+    <string name="login_validation_error_password_required">Password is required</string>
+    <string name="login_validation_error_password_length">Password must be 6 digits</string>
+    <string name="login_validation_error_password_numeric">Password must be numeric</string>
+
+    <!-- Otp Screen -->
+    <string name="otp_navigationBar_title">Login with SMS OTP</string>
+    <string name="otp_send_button_title">Send</string>
+    <string name="otp_phoneNumberInfo_label_text">Enter the password sent via SMS to your phone number %1$s.</string>
+    <string name="otp_remainingTime_label_text">Remaining Time</string>
+    <string name="otp_otp_textfield_placeholder">One Time Password</string>
+
+    <!-- Accounts Screen -->
+    <string name="accounts_navigationBar_title">Accounts</string>
+    <string name="accounts_quit_alert_message">Are you sure you want to quit?</string>
+    <string name="accounts_quit_alert_quitButton_title">Quit</string>
+    <string name="accounts_quit_alert_cancelButton_title">Cancel</string>
+    <string name="accounts_availableBalance_label_text">Available Balance</string>
+    <string name="accounts_searchAccount_searchBar_placeholder">Search Account</string>
+    <string name="accounts_last6Months_label_text">Last 6 Months</string>
+
+    <!-- Filter Screen -->
+    <string name="filter_navigationBar_title">Filter</string>
+    <string name="filter_reset_barButtonItem_title">Reset</string>
+    <string name="filter_filterText_label">Apply filters to customize your account view</string>
+    <string name="filter_filterOptions_title">Filter Options</string>
+    <string name="filter_currency_label_text">Currency</string>
+    <string name="filter_allButton_title">All</string>
+    <string name="filter_tryButton_title">TL</string>
+    <string name="filter_eurButton_title">EUR</string>
+    <string name="filter_usdButton_title">USD</string>
+    <string name="filter_dateRange_label_text">Date Range</string>
+    <string name="filter_startDate_label_text">Start Date</string>
+    <string name="filter_endDate_label_text">End Date</string>
+    <string name="filter_filterButton_title">Filter</string>
+
+    <!-- Account Details Screen -->
+    <string name = "accountDetails_navigationBar_title">Account Details</string>
+    <string name = "accountDetails_availableBalance_label_text">Available Balance</string>
+    <string name = "accountDetails_accountName_label_text">Account Name</string>
+    <string name = "accountDetails_iban_label_text">IBAN</string>
+    <string name = "accountDetails_accountNumber_label_text">Account Number</string>
+    <string name = "accountDetails_branch_label_text">Branch</string>
+
 </resources>

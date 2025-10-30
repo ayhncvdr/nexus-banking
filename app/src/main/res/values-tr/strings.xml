@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2025 Ayhan Cavdar. All Rights Reserved.
+  ~
+  ~ Save to the extent permitted by law, you may not use, copy, modify,
+  ~ distribute or create derivative works of this material or any part
+  ~ of it without the prior written consent of Ayhan Cavdar.
+  ~ Any reproduction of this material must contain this notice.
+  -->
+
+<resources>
+    <string name="app_name">NexusBanking</string>
+
+    <!-- Generic -->
+    <string name="generic_alert_title_error">Hata</string>
+    <string name="generic_alert_title_information">Bilgi</string>
+    <string name="generic_alert_title_warning">Uyarı</string>
+    <string name="generic_okButton_title">Tamam</string>
+    <string name="generic_cancelButton_title">İptal</string>
+
+    <!-- Login Screen -->
+    <string name="login_welcome_title">Tekrar Hoş Geldiniz</string>
+    <string name="login_welcome_subtitle">Hesabınıza güvenli bir şekilde giriş yapın</string>
+    <string name="login_form_title">Giriş Yap</string>
+    <string name="login_username_textfield_placeholder">Kullanıcı Adı</string>
+    <string name="login_password_textfield_placeholder">Şifre</string>
+    <string name="login_rememberMe_label_text">Beni Hatırla</string>
+    <string name="login_login_button_title">Giriş</string>
+    <string name="login_validation_error_username_required">Kullanıcı adı gerekli</string>
+    <string name="login_validation_error_username_length">Kullanıcı adı 6 ile 10 karakter arasında olmalı</string>
+    <string name="login_validation_error_username_alphanumeric">Kullanıcı adı alfanümerik olmalı</string>
+    <string name="login_validation_error_password_required">Şifre gerekli</string>
+    <string name="login_validation_error_password_length">Şifre 6 rakam olmalı</string>
+    <string name="login_validation_error_password_numeric">Şifre rakamlardan oluşmalı</string>
+
+    <!-- Otp Screen -->
+    <string name="otp_navigationBar_title">SMS Şifre ile Giriş</string>
+    <string name="otp_send_button_title">Gönder</string>
+    <string name="otp_phoneNumberInfo_label_text">%1$s numaralı telefonunuza SMS ile gönderilen şifreyi girin.</string>
+    <string name="otp_remainingTime_label_text">Kalan Süre</string>
+    <string name="otp_otp_textfield_placeholder">Tek Kullanımlık Şifre</string>
+
+    <!-- Accounts Screen -->
+    <string name="accounts_navigationBar_title">Hesaplarım</string>
+    <string name="accounts_quit_alert_message">Çıkmak istediğinize emin misiniz?</string>
+    <string name="accounts_quit_alert_quitButton_title">Çıkış</string>
+    <string name="accounts_quit_alert_cancelButton_title">İptal</string>
+    <string name="accounts_availableBalance_label_text">Kullanılabilir Bakiye</string>
+    <string name="accounts_searchAccount_searchBar_placeholder">Hesap Arama</string>
+    <string name="accounts_last6Months_label_text">Son 6 Ay</string>
+
+    <!-- Filter Screen -->
+    <string name="filter_navigationBar_title">Filtre</string>
+    <string name="filter_reset_barButtonItem_title">Sıfırla</string>
+    <string name="filter_filterText_label">Hesap görünümünüzü özelleştirmek için filtreler uygulayın</string>
+    <string name="filter_filterOptions_title">Filtre Seçenekleri</string>
+    <string name="filter_currency_label_text">Para Birimi</string>
+    <string name="filter_allButton_title">Hepsi</string>
+    <string name="filter_tryButton_title">TL</string>
+    <string name="filter_eurButton_title">EUR</string>
+    <string name="filter_usdButton_title">USD</string>
+    <string name="filter_dateRange_label_text">Tarih Aralığı</string>
+    <string name="filter_startDate_label_text">Başlangıç Tarihi</string>
+    <string name="filter_endDate_label_text">Bitiş Tarihi</string>
+    <string name="filter_filterButton_title">Filtre</string>
+
+    <!-- Account Details Screen -->
+    <string name = "accountDetails_navigationBar_title">Hesap Detayları</string>
+    <string name = "accountDetails_availableBalance_label_text">Kullanılabilir Bakiye</string>
+    <string name = "accountDetails_accountName_label_text">Hesap İsmi</string>
+    <string name = "accountDetails_iban_label_text">IBAN</string>
+    <string name = "accountDetails_accountNumber_label_text">Hesap Numarası</string>
+    <string name = "accountDetails_branch_label_text">Şube</string>
+
+</resources>
