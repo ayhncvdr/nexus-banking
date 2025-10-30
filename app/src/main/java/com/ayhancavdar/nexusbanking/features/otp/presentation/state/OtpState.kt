@@ -27,5 +27,6 @@ data class OtpState(
     val sliderProgress: Float = 1.0f,
     val isTimerRunning: Boolean = false,
     val canResendOtp: Boolean = false,
-    val starredSmsNumber: String = ""
+    val starredSmsNumber: String = "",
+    val customerName: String = "",
 ) : Parcelable

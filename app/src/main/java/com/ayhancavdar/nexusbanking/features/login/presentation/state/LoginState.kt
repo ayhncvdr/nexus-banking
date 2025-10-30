@@ -25,4 +25,5 @@ data class LoginState(
     val isLoading: Boolean = false,
     val loginApiError: String? = null,
     val starredSmsNumber: String? = null,
+    val customerName: String? = null,
 ) : Parcelable

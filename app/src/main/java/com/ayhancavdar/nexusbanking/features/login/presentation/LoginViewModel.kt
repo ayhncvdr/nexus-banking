@@ -160,6 +160,7 @@ class LoginViewModel @Inject constructor(
                     it.copy(
                         isLoading = false,
                         loginApiError = null,
+                        customerName = user.customerName,
                         starredSmsNumber = user.smsOtpNumbers.firstOrNull()?.starredNumber,
                         isLoginButtonEnabled = true,
                     )
@@ -217,7 +218,7 @@ class LoginViewModel @Inject constructor(
 
     //region Navigation
     fun onNavigationToOtp() {
-        updateUiState { it.copy(starredSmsNumber = null) }
+        updateUiState { it.copy(customerName = null, starredSmsNumber = null) }
     }
     //endregion
 }

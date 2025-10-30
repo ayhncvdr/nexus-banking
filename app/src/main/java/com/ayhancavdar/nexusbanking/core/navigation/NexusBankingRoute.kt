@@ -9,9 +9,8 @@
 
 package com.ayhancavdar.nexusbanking.core.navigation
 
-import com.ayhancavdar.nexusbanking.features.filter.navigation.FilterParametersNavType
+import com.ayhancavdar.nexusbanking.features.accounts.data.model.Account
 import com.ayhancavdar.nexusbanking.features.filter.state.FilterParameters
-import kotlin.reflect.typeOf
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -23,18 +22,17 @@ sealed interface NexusBankingRoute {
     data object Login : NexusBankingRoute
 
     @Serializable
-    data class Otp(val starredSmsNumber: String) : NexusBankingRoute
+    data class Otp(val customerName: String, val starredSmsNumber: String) : NexusBankingRoute
 
     @Serializable
-    data object Accounts : NexusBankingRoute
+    data class Accounts(val customerName: String) : NexusBankingRoute
 
     @Serializable
-    data class Filter(val filterParameters: FilterParameters? = null) : NexusBankingRoute {
-        companion object {
-            val typeMap = mapOf(typeOf<FilterParameters?>() to FilterParametersNavType)
-        }
-    }
+    data class Filter(val filterParameters: FilterParameters? = null) : NexusBankingRoute
 
     @Serializable
-    data class AccountDetails(val accountIban: String) : NexusBankingRoute
+    data class AccountDetails(
+        val account: Account,
+        val customerName: String,
+    ) : NexusBankingRoute
 }

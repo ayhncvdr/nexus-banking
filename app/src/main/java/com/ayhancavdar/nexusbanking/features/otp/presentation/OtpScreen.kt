@@ -76,7 +76,7 @@ import java.util.Locale
 
 @Composable
 fun OtpScreen(
-    onOtpSuccess: () -> Unit,
+    onOtpSuccess: (String) -> Unit,
     onNavigateBack: () -> Unit,
     viewModel: OtpViewModel = hiltViewModel()
 ) {
@@ -96,7 +96,7 @@ fun OtpScreen(
 @Composable
 private fun OtpScreenContent(
     uiState: OtpState,
-    onOtpSuccess: () -> Unit,
+    onOtpSuccess: (String) -> Unit,
     onNavigateBack: () -> Unit,
     onOtpChange: (String) -> Unit,
     onAttemptLogin: () -> Unit,
@@ -172,7 +172,7 @@ private fun OtpScreenContent(
 
     LaunchedEffect(uiState.navigateToAccounts) {
         if (uiState.navigateToAccounts) {
-            onOtpSuccess()
+            onOtpSuccess(uiState.customerName)
             onNavigationToAccounts()
         }
     }

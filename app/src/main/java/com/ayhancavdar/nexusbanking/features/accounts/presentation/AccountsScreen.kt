@@ -82,7 +82,7 @@ fun AccountsScreen(
     filterResult: FilterParameters? = null,
     onNavigateToLogin: () -> Unit = {},
     onNavigateToFilter: (FilterParameters?) -> Unit = {},
-    onNavigateToAccountDetails: (Account) -> Unit = {},
+    onNavigateToAccountDetails: (customerName: String, account: Account) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -116,7 +116,7 @@ private fun AccountsScreenContent(
     onLogoutConfirm: () -> Unit,
     onLogoutCancel: () -> Unit,
     onNavigateToFilter: () -> Unit,
-    onNavigateToAccountDetails: (Account) -> Unit,
+    onNavigateToAccountDetails: (customerName: String, account: Account) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -273,7 +273,7 @@ private fun AccountsCard(
     uiState: AccountsState,
     onSearchTextChange: (String) -> Unit,
     onClearSearch: () -> Unit,
-    onNavigateToAccountDetails: (Account) -> Unit
+    onNavigateToAccountDetails: (customerName: String, account: Account) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -303,6 +303,7 @@ private fun AccountsCard(
             if (uiState.filteredAccounts.isNotEmpty()) {
                 AccountsList(
                     accounts = uiState.filteredAccounts,
+                    customerName = uiState.customerName,
                     onNavigateToAccountDetails = onNavigateToAccountDetails,
                 )
             } else if (uiState.searchText.isNotEmpty()) {
@@ -450,13 +451,15 @@ private fun SearchBar(
 @Composable
 private fun AccountsList(
     accounts: List<Account>,
-    onNavigateToAccountDetails: (Account) -> Unit,
+    customerName: String,
+    onNavigateToAccountDetails: (customerName: String, account: Account) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         accounts.forEachIndexed { index, account ->
             AccountListItem(
                 account = account,
+                customerName = customerName,
                 onAccountClick = onNavigateToAccountDetails
             )
 
@@ -474,13 +477,14 @@ private fun AccountsList(
 @Composable
 private fun AccountListItem(
     account: Account,
-    onAccountClick: (Account) -> Unit,
+    customerName: String,
+    onAccountClick: (customerName: String, account: Account) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onAccountClick(account) },
+            .clickable { onAccountClick(customerName, account) },
         color = Color.Transparent,
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.x8))
     ) {
@@ -552,7 +556,7 @@ private fun AccountsScreenPreview() {
             onLogoutConfirm = {},
             onLogoutCancel = {},
             onNavigateToFilter = {},
-            onNavigateToAccountDetails = {},
+            onNavigateToAccountDetails = { _, _ -> },
         )
     }
 }

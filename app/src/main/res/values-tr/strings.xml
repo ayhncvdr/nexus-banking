@@ -63,4 +63,12 @@
     <string name="filter_endDate_label_text">Bitiş Tarihi</string>
     <string name="filter_filterButton_title">Filtre</string>
 
+    <!-- Account Details Screen -->
+    <string name = "accountDetails_navigationBar_title">Hesap Detayları</string>
+    <string name = "accountDetails_availableBalance_label_text">Kullanılabilir Bakiye</string>
+    <string name = "accountDetails_accountName_label_text">Hesap İsmi</string>
+    <string name = "accountDetails_iban_label_text">IBAN</string>
+    <string name = "accountDetails_accountNumber_label_text">Hesap Numarası</string>
+    <string name = "accountDetails_branch_label_text">Şube</string>
+
 </resources>

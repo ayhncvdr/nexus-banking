@@ -43,7 +43,7 @@ class LoginScreenUITest {
             NexusBankingTheme {
                 LoginScreenContent(
                     uiState = LoginState(),
-                    onLoginSuccess = {},
+                    onLoginSuccess = { _, _ -> },
                     onUsernameChange = {},
                     onPasswordChange = {},
                     onRememberMeChange = {},
@@ -85,7 +85,7 @@ class LoginScreenUITest {
             NexusBankingTheme {
                 LoginScreenContent(
                     uiState = LoginState(isLoginButtonEnabled = false),
-                    onLoginSuccess = {},
+                    onLoginSuccess = { _, _ -> },
                     onUsernameChange = {},
                     onPasswordChange = {},
                     onRememberMeChange = {},
@@ -113,7 +113,7 @@ class LoginScreenUITest {
                         passwordInput = "123456",
                         isLoginButtonEnabled = true
                     ),
-                    onLoginSuccess = {},
+                    onLoginSuccess = { _, _ -> },
                     onUsernameChange = {},
                     onPasswordChange = {},
                     onRememberMeChange = {},
@@ -139,7 +139,7 @@ class LoginScreenUITest {
             NexusBankingTheme {
                 LoginScreenContent(
                     uiState = LoginState(),
-                    onLoginSuccess = {},
+                    onLoginSuccess = { _, _ -> },
                     onUsernameChange = { capturedUsername = it },
                     onPasswordChange = {},
                     onRememberMeChange = {},
@@ -173,7 +173,7 @@ class LoginScreenUITest {
                         passwordInput = "123456",
                         isLoginButtonEnabled = true
                     ),
-                    onLoginSuccess = {},
+                    onLoginSuccess = { _, _ -> },
                     onUsernameChange = {},
                     onPasswordChange = {},
                     onRememberMeChange = {},
@@ -203,7 +203,7 @@ class LoginScreenUITest {
             NexusBankingTheme {
                 LoginScreenContent(
                     uiState = LoginState(rememberMe = rememberMeState),
-                    onLoginSuccess = {},
+                    onLoginSuccess = { _, _ -> },
                     onUsernameChange = {},
                     onPasswordChange = {},
                     onRememberMeChange = {

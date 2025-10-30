@@ -27,4 +27,5 @@ data class AccountsState(
     val accountsApiError: String? = null,
     val showLogoutDialog: Boolean = false,
     val appliedFilters: FilterParameters? = null,
+    val customerName: String = "",
 ) : Parcelable
